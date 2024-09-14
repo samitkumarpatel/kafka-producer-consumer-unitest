@@ -12,7 +12,11 @@ class TestcontainersConfiguration {
 	@Bean
 	@ServiceConnection
 	KafkaContainer kafkaContainer() {
-		return new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
+		// apache/kafka-native:latest
+		// confluentinc/cp-kafka
+		DockerImageName myImage = DockerImageName.parse("apache/kafka-native:latest").asCompatibleSubstituteFor("confluentinc/cp-kafka");
+		DockerImageName myImageNonNative = DockerImageName.parse("confluentinc/cp-kafka");
+		return new KafkaContainer(myImageNonNative);
 	}
 
 }
